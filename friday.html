@@ -1,0 +1,209 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="icon" href="favicon-sun.ico" type="image/x-icon" />
+    <link href="https://fonts.googleapis.com/css2?family=Chewy&display=swap" rel="stylesheet">
+    <title>Is it Friday yet?</title>
+    <!-- <style></style> -->
+    <link id="theme" rel="stylesheet" type="text/css" href="assets/css/friday-sunrise-theme.css">
+</head>
+
+<body height="100%">
+    <div height="100%" id="background">
+
+        <!-- Keep the nav updated with new themes -->
+        <ul class="nav">
+            <li id="nav-title"><strong>Themes:</strong></li>
+
+            <!-- Sunrise -->
+            <li class="nav-item" onmouseover="this.style.textDecoration='underline'; this.style.cursor='pointer'" 
+            onmouseout="this.style.textDecoration='none'"
+            onclick="swapTheme('assets/css/friday-sunrise-theme.css', 'assets/images/snorlax-2.gif')">Sunrise
+            </li>
+
+            <!-- Sunset -->
+            <li class="nav-item" onmouseover="this.style.textDecoration='underline'; this.style.cursor='pointer'" 
+            onmouseout="this.style.textDecoration='none'"
+            onclick="swapTheme('assets/css/friday-sunset-theme.css', 'assets/images/test.txt');">Sunset</li>
+        </ul>
+
+        <div class="jumbotron jumbotron-fluid">
+            <div class="container">
+                <h1 class="display-1">Is it <span class="dayOfWeek">Friday</span> yet?</h1>
+            </div>
+        </div>
+        <!-- Center Container-->
+        <div class="container main">
+            <p class="display-1" id="top-caption">Only...</p>
+            <div id="countbox">
+                <div class="row">
+                    <!-- Days -->
+                    <div class="col wrapperBox">
+                        <div class="col-12 digitBox" id="daysBox"></div>
+                        <div class="col-12 labelBox" id="daysBox2"></div>
+                    </div>
+                    <div class="col digitBox">:</div>
+                    <!-- Hours -->
+                    <div class="col wrapperBox">
+                        <div class="col-12 digitBox" id="hoursBox"></div>
+                        <div class="col-12 labelBox" id="hoursBox2"></div>
+                    </div>
+                    <div class="col digitBox">:</div>
+                    <!-- Minutes -->
+                    <div class="col wrapperBox">
+                        <div class="col-12 digitBox" id="minutesBox"></div>
+                        <div class="col-12 labelBox" id="minutesBox2"></div>
+                    </div>
+                    <div class="col digitBox">:</div>
+                    <!-- Seconds -->
+                    <div class="col wrapperBox">
+                        <div class="col-12 digitBox" id="secondsBox"></div>
+                        <div class="col-12 labelBox" id="secondsBox2"></div>
+                    </div>
+                </div>
+            </div>
+            <p class="display-1" id="bottom-caption">until 
+                <span class="dayOfWeek dayOfWeek-sm">Friday!</span></p>
+
+            <img id="img-1" class="img-fluid" src="assets/images/snorlax-2.gif" alt="nap is life" />
+        </div>
+    </div>
+
+    <!-- THEMING GUIDE:
+        1. One theme for when it IS Friday
+        2. Another theme for when it is NOT Friday
+    -->
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
+
+    <script>
+        //Theme controller 
+        //theme: path to css file
+        //img: path to image
+        function swapTheme(theme, img) {
+            document.getElementById("theme").setAttribute("href", theme);
+            document.getElementById('img-1').src=img;
+        }
+    </script>
+
+    <script>
+        //Countdown controller
+
+        function getNextDayOfWeek(date, dayOfWeek) {
+
+            var resultDate = new Date(date.getTime());
+
+            resultDate.setDate(date.getDate() + (7 + dayOfWeek - date.getDay()) % 7);
+            //NEXT FRIDAY IF ON A FRIDAY VERSION: (date.getDate() + (7 + dayOfWeek - date.getDay()+1) % 7) +1 
+
+            return resultDate;
+        }
+
+        const MONDAY = 1;
+        const TUESDAY = 2;
+        const WEDNESDAY = 3;
+        const THURSDAY = 4;
+        const FRIDAY = 5;
+        const SATURDAY = 6;
+        const SUNDAY = 7;
+
+        //NOTE: To test the Friday UI, simply change the constant below to the current day of the week. 
+        dateFuture = getNextDayOfWeek(new Date(), FRIDAY);
+        //PLACEHOLDER date for testing: 
+        //dateFuture = new Date(2020, 7, 27, 5, 21, 43);
+
+        //set Time to 00:00:00:0000 
+        dateFuture.setHours(0, 0, 0, 0);
+        console.log(dateFuture);
+
+        function GetCount() {
+
+            dateNow = new Date();  //grab current date
+            amount = dateFuture.getTime() - dateNow.getTime(); //calc milliseconds between dates
+            delete dateNow;
+
+            // Friday!!!
+            if (amount < 0) {
+                document.getElementById('countbox').innerHTML = "IT'S FRIDAY!!!";
+
+                //TO DO: The countbox needs to be rethemed in this case.
+                //TO DO: Is it friday yet background video and certain content needs to be hidden with display: none; 
+            }
+
+            // Not Friday yet...
+            else {
+                days = 0; hours = 0; mins = 0; secs = 0; //out = "";
+
+                amount = Math.floor(amount / 1000); //kill the "milliseconds" so just secs
+
+                days = Math.floor(amount / 86400);//days
+                amount = amount % 86400;
+
+                hours = Math.floor(amount / 3600);//hours
+                amount = amount % 3600;
+
+                mins = Math.floor(amount / 60);//minutes
+                amount = amount % 60;
+
+                secs = Math.floor(amount);//seconds
+
+
+                //Default output string
+                /*
+                if (days != 0) { out += days + " day" + ((days != 1) ? "s" : "") + ", "; }
+                if (days != 0 || hours != 0) { out += hours + " hour" + ((hours != 1) ? "s" : "") + ", "; }
+                if (days != 0 || hours != 0 || mins != 0) { out += mins + " minute" + ((mins != 1) ? "s" : "") + ", "; }
+                out += secs + " seconds";
+                 //document.getElementById('countbox').innerHTML = out;
+                */
+
+                //Countdown display values
+                let displayDays = "" + days; console.log("Days: " + displayDays);
+                let displayHours = ((hours < 10) ? ("0" + hours) : ("" + hours)); console.log("Hours: " + displayHours);
+                let displayMinutes = ((mins < 10) ? ("0" + mins) : ("" + mins)); console.log("Minutes: " + displayMinutes);
+                let displaySeconds = ((secs < 10) ? ("0" + secs) : ("" + secs)); console.log("Seconds: " + displaySeconds);
+
+                //label display values
+                let daysString = (days != 1) ? "Days" : "Day";
+                let hoursString = (hours != 1) ? "Hours" : "Hour";
+                let minutesString = (mins != 1) ? "Minutes" : "Minute";
+                let secondsString = (secs != 1) ? "Seconds" : "Second";
+
+                //populate containers 
+                document.getElementById('daysBox').innerHTML = displayDays;
+                document.getElementById('hoursBox').innerHTML = displayHours;
+                document.getElementById('minutesBox').innerHTML = displayMinutes;
+                document.getElementById('secondsBox').innerHTML = displaySeconds;
+                document.getElementById('daysBox2').innerHTML = daysString;
+                document.getElementById('hoursBox2').innerHTML = hoursString;
+                document.getElementById('minutesBox2').innerHTML = minutesString;
+                document.getElementById('secondsBox2').innerHTML = secondsString;
+
+
+                setTimeout("GetCount()", 1000);
+            }
+        }
+
+        window.onload = function () { GetCount(); }//call when everything has loaded
+    </script>
+</body>
+
+</html>
