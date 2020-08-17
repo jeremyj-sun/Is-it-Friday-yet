@@ -1,7 +1,7 @@
 /*count down font */
 @font-face {
     font-family: 'digital-7';
-    src: url('assets/fonts/digital-7.ttf');
+    src: url('../fonts/digital-7.ttf');
 }
 
 html, body {
