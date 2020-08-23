@@ -107,7 +107,16 @@ html, body {
 }
 
 /*Nav*/
-.nav {
+/*regular nav */
+#nav1 {
+    position: absolute; 
+    top: 2vh;
+    left: 2vw;
+    color: #F5F5DC;
+}
+/* friday nav */
+#nav2 {
+    display: none;
     position: absolute; 
     top: 2vh;
     left: 2vw;
@@ -125,6 +134,10 @@ html, body {
     max-width: 80%; 
     border: outset #041a2f 5px; 
     margin-bottom: 10vh;
+}
+
+#video {
+    display: none;
 }
 
 

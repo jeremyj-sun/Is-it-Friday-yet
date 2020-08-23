@@ -39,6 +39,10 @@ html, body {
     font-size: 6vw; 
     -webkit-text-stroke: 1px rgb(194, 150, 5);
 }
+#now {
+    color: #F5F5DC; 
+    font-size: 8vw;
+}
 
 
 /*header */
@@ -107,7 +111,16 @@ html, body {
 }
 
 /*Nav*/
-.nav {
+/*regular nav */
+#nav1 {
+    position: absolute; 
+    top: 2vh;
+    left: 2vw;
+    color: #F5F5DC;
+}
+/* friday nav */
+#nav2 {
+    display: none;
     position: absolute; 
     top: 2vh;
     left: 2vw;

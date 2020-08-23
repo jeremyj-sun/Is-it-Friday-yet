@@ -20,19 +20,36 @@
     <div height="100%" id="background">
 
         <!-- Keep the nav updated with new themes -->
-        <ul class="nav">
+        <ul class="nav" id="nav1">
             <li id="nav-title"><strong>Themes:</strong></li>
 
             <!-- Sunrise -->
-            <li class="nav-item" onmouseover="this.style.textDecoration='underline'; this.style.cursor='pointer'" 
-            onmouseout="this.style.textDecoration='none'"
-            onclick="swapTheme('assets/css/friday-sunrise-theme.css', 'assets/images/snorlax-2.gif')">Sunrise
+            <li class="nav-item" onmouseover="this.style.textDecoration='underline'; this.style.cursor='pointer'"
+                onmouseout="this.style.textDecoration='none'"
+                onclick="swapTheme('assets/css/friday-sunrise-theme.css', 'assets/images/snorlax-2.gif')">Sunrise
             </li>
 
             <!-- Sunset -->
-            <li class="nav-item" onmouseover="this.style.textDecoration='underline'; this.style.cursor='pointer'" 
-            onmouseout="this.style.textDecoration='none'"
-            onclick="swapTheme('assets/css/friday-sunset-theme.css', 'assets/images/true-detective.txt');">Sunset</li>
+            <li class="nav-item" onmouseover="this.style.textDecoration='underline'; this.style.cursor='pointer'"
+                onmouseout="this.style.textDecoration='none'"
+                onclick="swapTheme('assets/css/friday-sunset-theme.css', 'assets/images/true-detective.txt');">Sunset
+            </li>
+        </ul>
+
+        <ul class="nav" id="nav2">
+            <li id="nav-title"><strong>Themes:</strong></li>
+
+            <!-- Sunrise -->
+            <li class="nav-item" onmouseover="this.style.textDecoration='underline'; this.style.cursor='pointer'"
+                onmouseout="this.style.textDecoration='none'"
+                onclick="swapTheme('assets/css/friday-sunrise-theme-now.css', 'assets/images/snorlax-2.gif')">Sunrise
+            </li>
+
+            <!-- Sunset -->
+            <li class="nav-item" onmouseover="this.style.textDecoration='underline'; this.style.cursor='pointer'"
+                onmouseout="this.style.textDecoration='none'"
+                onclick="swapTheme('assets/css/friday-sunset-theme-now.css', 'assets/images/true-detective.txt');">Sunset
+            </li>
         </ul>
 
         <!-- Header -->
@@ -43,36 +60,42 @@
         </div>
 
         <!-- Center Container-->
-        <div class="container main">
+        <div class="container-fluid main" id="main">
+
+            <!-- video -->
+            <!-- controls mute autoplay loop -->
+            <video width="100%" class="embed-responsive-item" id="video" loop controls autoplay mute>
+                <source src="assets/videos/GORD-BAMFORD-IS-IT-FRIDAY-YET(OFFICIAL-VIDEO-HD).mp4" type="video/mp4"/>
+            </video>
             <p class="display-1" id="top-caption">Only...</p>
             <div id="countbox">
                 <div class="row">
                     <!-- Days -->
-                    <div class="col wrapperBox">
+                    <div class="col wrapperBox" id="daysWrapper">
                         <div class="col-12 digitBox" id="daysBox"></div>
                         <div class="col-12 labelBox" id="daysBox2"></div>
                     </div>
-                    <div class="col digitBox">:</div>
+                    <div class="col digitBox" id="daysColon">:</div>
                     <!-- Hours -->
-                    <div class="col wrapperBox">
+                    <div class="col wrapperBox" id="hoursWrapper">
                         <div class="col-12 digitBox" id="hoursBox"></div>
                         <div class="col-12 labelBox" id="hoursBox2"></div>
                     </div>
-                    <div class="col digitBox">:</div>
+                    <div class="col digitBox" id="hoursColon">:</div>
                     <!-- Minutes -->
-                    <div class="col wrapperBox">
+                    <div class="col wrapperBox" id="minutesWrapper">
                         <div class="col-12 digitBox" id="minutesBox"></div>
                         <div class="col-12 labelBox" id="minutesBox2"></div>
                     </div>
-                    <div class="col digitBox">:</div>
+                    <div class="col digitBox" id="minutesColon">:</div>
                     <!-- Seconds -->
-                    <div class="col wrapperBox">
+                    <div class="col wrapperBox" id="secondsWrapper">
                         <div class="col-12 digitBox" id="secondsBox"></div>
                         <div class="col-12 labelBox" id="secondsBox2"></div>
                     </div>
                 </div>
             </div>
-            <p class="display-1" id="bottom-caption">until 
+            <p class="display-1" id="bottom-caption">until
                 <span class="dayOfWeek dayOfWeek-sm">Friday!</span></p>
 
             <img id="img-1" class="img-fluid" src="assets/images/snorlax-2.gif" alt="nap is life" />
@@ -82,6 +105,7 @@
     <!-- THEMING GUIDE:
         1. One theme for when it IS Friday
         2. Another theme for when it is NOT Friday
+        3. Use the naming conventions: <dayOfWeek>-<themeName>-theme.css and <dayOfWeek>-<themeName>-theme-now.css for the Friday theme
     -->
 
     <!-- Optional JavaScript -->
@@ -102,13 +126,14 @@
         //img: path to image
         function swapTheme(theme, img) {
             document.getElementById("theme").setAttribute("href", theme);
-            document.getElementById('img-1').src=img;
+            document.getElementById('img-1').src = img;
         }
     </script>
 
     <script>
         //Countdown controller
 
+        //calculate the nextFriday
         function getNextDayOfWeek(date, dayOfWeek) {
 
             var resultDate = new Date(date.getTime());
@@ -117,6 +142,11 @@
             //NEXT FRIDAY IF ON A FRIDAY VERSION: (date.getDate() + (7 + dayOfWeek - date.getDay()+1) % 7) +1 
 
             return resultDate;
+        }
+
+        //string insertion function
+        function insert(str, index, value) {
+            return str.substr(0, index) + value + str.substr(index);
         }
 
         const MONDAY = 1;
@@ -128,9 +158,9 @@
         const SUNDAY = 7;
 
         //NOTE: To test the Friday UI, simply change the constant below to the current day of the week. 
-        dateFuture = getNextDayOfWeek(new Date(), FRIDAY);
+        var dateFuture = getNextDayOfWeek(new Date(), FRIDAY);
         //PLACEHOLDER date for testing: 
-        //dateFuture = new Date(2020, 7, 27, 5, 21, 43);
+        //dateFuture = new Date(2020, 7, 20, 21, 35, 0);
 
         //set Time to 00:00:00:0000 
         dateFuture.setHours(0, 0, 0, 0);
@@ -141,17 +171,59 @@
             dateNow = new Date();  //grab current date
             amount = dateFuture.getTime() - dateNow.getTime(); //calc milliseconds between dates
             delete dateNow;
+            var theme = document.getElementById("theme"); //style sheet element 
+            var cssPath = theme.getAttribute("href"); //path of css file
+            var isFriday = false; //true if it is Friday 
 
             // Friday!!!
             if (amount < 0) {
-                document.getElementById('countbox').innerHTML = "IT'S FRIDAY!!!";
+                
+                let countbox = document.getElementById('countbox'); //countbox
+                let video = document.getElementById("video"); //background video
+                let main = document.getElementById("main"); //main content
 
-                //TO DO: The countbox needs to be rethemed in this case.
-                //TO DO: Is it friday yet background video and certain content needs to be hidden with display: none; 
+                //CONTROL VIDEO
+                //video.setAttribute("loop", true);
+                //video.click();
+                //video.load(); //update settings
+                //video.play();
+                //video.setAttribute("autoplay", '');
+                video.removeAttribute("mute");
+                main.setAttribute("class", "container-fluid main embed-responsive embed-responsive-16by9");
+
+                //update css
+                var insertIndex = cssPath.lastIndexOf(".css");
+                cssPath = insert(cssPath, insertIndex,"-now");
+                //console.log(cssPath);
+                theme.setAttribute("href", cssPath);
+
+                countbox.innerHTML = "IT'S FRIDAY!!!";
+
+               
+
+                //Update nav:
+                //let nav1 = document.getElementById('nav1');
+                //let nav2 = document.getElementById('nav2');
+                //nav1.style.display='none';
+                //nav2.style.display='absoulte';
+                isFriday = true;
+
+                //Operation to revert theme if it is no longer friday: (TBD) 
+                //1. Only execute above logic if isFriday = false initially. 
+                //2. Recursively call a function to check if the day is over yet.
+                //   Once the day is over, call GetCount(); 
             }
 
             // Not Friday yet...
             else {
+                isFriday = false;
+                let video = document.getElementById("video"); //background video
+                //Operation to revert theme + video if its no longer FRIDAY (TBD)
+                video.setAttribute("mute", '');
+                video.removeAttribute("autoplay");
+                video.style.display='none';
+
+                //counter values
                 days = 0; hours = 0; mins = 0; secs = 0; //out = "";
 
                 amount = Math.floor(amount / 1000); //kill the "milliseconds" so just secs
@@ -177,17 +249,38 @@
                  //document.getElementById('countbox').innerHTML = out;
                 */
 
-                //Countdown display values
-                let displayDays = "" + days; console.log("Days: " + displayDays);
-                let displayHours = ((hours < 10) ? ("0" + hours) : ("" + hours)); console.log("Hours: " + displayHours);
-                let displayMinutes = ((mins < 10) ? ("0" + mins) : ("" + mins)); console.log("Minutes: " + displayMinutes);
-                let displaySeconds = ((secs < 10) ? ("0" + secs) : ("" + secs)); console.log("Seconds: " + displaySeconds);
+
 
                 //label display values
                 let daysString = (days != 1) ? "Days" : "Day";
                 let hoursString = (hours != 1) ? "Hours" : "Hour";
                 let minutesString = (mins != 1) ? "Minutes" : "Minute";
                 let secondsString = (secs != 1) ? "Seconds" : "Second";
+
+                //hide zeros and set leading digits
+                let lead = "days" //lead can equal days, hours, minutes or seconds 
+                if (days == 0) {
+                    document.getElementById("daysWrapper").style.display = "none";
+                    document.getElementById("daysColon").style.display = "none";
+                    lead = "hours";
+                }
+                if (days == 0 && hours == 0) {
+                    document.getElementById("hoursWrapper").style.display = "none";
+                    document.getElementById("hoursColon").style.display = "none";
+                    lead = "minutes";
+                }
+                if (days == 0 && hours == 0 && mins == 0) {
+                    document.getElementById("minutesWrapper").style.display = "none";
+                    document.getElementById("minutesColon").style.display = "none";
+                    lead = "seconds";
+                }
+
+
+                //Countdown display values
+                let displayDays = "" + days; console.log("Days: " + displayDays);
+                let displayHours = ((hours < 10 && lead != "hours") ? ("0" + hours) : ("" + hours)); console.log("Hours: " + displayHours);
+                let displayMinutes = ((mins < 10 && lead != "minutes") ? ("0" + mins) : ("" + mins)); console.log("Minutes: " + displayMinutes);
+                let displaySeconds = ((secs < 10 && lead != "seconds") ? ("0" + secs) : ("" + secs)); console.log("Seconds: " + displaySeconds);
 
                 //populate containers 
                 document.getElementById('daysBox').innerHTML = displayDays;

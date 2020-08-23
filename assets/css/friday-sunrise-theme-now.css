@@ -1,0 +1,161 @@
+/*count down font */
+@font-face {
+    font-family: 'digital-7';
+    src: url('../fonts/digital-7.ttf');
+}
+
+html, body {
+    height: 100%;
+}
+
+/* --- FONT STYLES --- */
+/*primary display font*/
+.display-1 {
+    margin-top: 180px;
+    font-family: 'Chewy', 'cursive';
+    text-align: center;
+    font-size: 7vw;
+}
+#top-caption {
+    margin-top: 0; 
+    margin-bottom: 0; 
+    color: #F5F5DC; 
+    font-size: 6vw;
+    display: none;
+}
+#bottom-caption {
+    margin-top: 0; 
+    margin-bottom: 0; 
+    color: #F5F5DC; 
+    font-size: 6vw; 
+    margin-bottom: 5vh;
+    display: none;
+}
+/*Day: e.g. FRIDAY */
+.dayOfWeek {
+    font-weight: bold;
+    color: #ffdf00;
+    font-size: 11vw;
+}
+.dayOfWeek-sm {
+    font-size: 6vw; 
+    -webkit-text-stroke: 1px rgb(194, 150, 5);
+}
+
+
+/*header */
+.jumbotron {
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+    color: #F5F5DC;
+    background-image: url(../images/sunset-1.jpg);
+    background-position: 5%;
+    background-size: cover;
+    -webkit-text-stroke: 2px rgb(194, 150, 5);
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.699);
+    z-index: 1;
+    margin-bottom: 0rem;
+
+}
+
+/* Countbox Theme */
+#countbox {
+    background-color: #041a2fb7;
+    padding: 5% 5% 5% 5%;
+    margin-bottom: 5vh;
+    margin-top: 5vh;
+    color:  #ffdf00;
+    -webkit-text-stroke: 2px rgb(194, 150, 5);
+    font-size: 9vw;
+    font-family: 'Chewy', 'cursive';
+    letter-spacing: 0.1em;
+    font-weight: bold;
+    position: absolute;
+    left: 0; 
+    right: 0; 
+    margin-left: auto; 
+    margin-right: auto; 
+    text-align: center;
+}
+
+/*Digit Theme*/
+.digitBox {
+    font-family: 'digital-7', sans-serif;
+    font-size: 8vw;
+    color: #F5F5DC;
+    text-align: center;
+    padding: 0% 0%;
+
+
+}
+
+/*Label Theme*/
+.labelBox {
+    color: #F5F5DC;
+    text-align: center;
+    font-size: 2vw;
+    padding: 0% 0%;
+}
+
+/*digit + label wrapper */
+.wrapperBox {
+    justify-content: center;
+}
+
+
+/* Background image: e.g. background-image: url(assets/images/midnight.png); */
+#background {
+    background-image: url(../images/sunrise-1.jpg);
+    background-size: cover;
+    min-height: 100%;
+}
+
+/* Align contents center */
+.main {
+    display: -webkit-flex;
+    display: flex;
+    -webkit-align-items: center;
+    align-items: center;
+    -webkit-justify-content: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+/*Nav*/
+/*regular nav */
+#nav1 {
+    display: none;
+    position: absolute; 
+    top: 2vh;
+    left: 2vw;
+    color: #F5F5DC;
+}
+/* friday nav */
+#nav2 {
+    position: absolute; 
+    top: 2vh;
+    left: 2vw;
+    color: #F5F5DC;
+}
+.nav-item {
+    margin: 0 1vw;
+}
+#nav-title {
+    margin-right: 1vw
+}
+
+/*image*/
+.img-fluid {
+    display: none;
+    max-width: 80%; 
+    border: outset #041a2f 5px; 
+    margin-bottom: 10vh;
+}
+
+/*video*/
+#video {
+    position: absolute; 
+    top: 0vh;
+    left: 0vw;
+}
+
