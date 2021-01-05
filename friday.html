@@ -12,8 +12,13 @@
     <link rel="icon" href="favicon-sun.ico" type="image/x-icon" />
     <link href="https://fonts.googleapis.com/css2?family=Chewy&display=swap" rel="stylesheet">
     <title>Is it Friday yet?</title>
+
     <!-- <style></style> -->
     <link id="theme" rel="stylesheet" type="text/css" href="assets/css/friday-sunrise-theme.css">
+    <link rel="stylesheet" type="text/css" href="assets/css/loader.css">
+
+    <!-- Jquery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </head>
 
 <body height="100%">
@@ -32,7 +37,7 @@
             <!-- Sunset -->
             <li class="nav-item" onmouseover="this.style.textDecoration='underline'; this.style.cursor='pointer'"
                 onmouseout="this.style.textDecoration='none'"
-                onclick="swapTheme('assets/css/friday-sunset-theme.css', 'assets/images/true-detective.txt');">Sunset
+                onclick="swapTheme('assets/css/friday-sunset-theme.css', 'assets/images/true-detective.gif');">Sunset
             </li>
         </ul>
 
@@ -62,11 +67,11 @@
         <!-- Center Container-->
         <div class="container-fluid main" id="main">
 
-            <!-- video -->
-            <!-- controls mute autoplay loop -->
-            <video width="100%" class="embed-responsive-item" id="video" loop controls autoplay mute>
-                <source src="assets/videos/GORD-BAMFORD-IS-IT-FRIDAY-YET(OFFICIAL-VIDEO-HD).mp4" type="video/mp4"/>
-            </video>
+            <!-- video -->        
+            <iframe width="100%" class="embed-responsive-item" id="video" src="https://www.youtube.com/embed/MPymnur5HEo?version=3&autoplay=1&controls=0&&showinfo=0&loop=1" 
+                frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
+            </iframe>
+
             <p class="display-1" id="top-caption">Only...</p>
             <div id="countbox">
                 <div class="row">
@@ -100,6 +105,14 @@
 
             <img id="img-1" class="img-fluid" src="assets/images/snorlax-2.gif" alt="nap is life" />
         </div>
+    </div> <!-- background -->
+
+    <!-- Loader -->
+    <div class='loader-wrapper'>
+        <figure>
+            <img src='assets/images/sun-loader.svg' id='loader'/>
+            <figcaption id='loaderCaption'>Loading...</figcaption>
+        </figure>
     </div>
 
     <!-- THEMING GUIDE:
@@ -110,9 +123,7 @@
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
-        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
-        crossorigin="anonymous"></script>
+    <!-- Delete default jquery when needed -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
         integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
         crossorigin="anonymous"></script>
@@ -159,8 +170,6 @@
 
         //NOTE: To test the Friday UI, simply change the constant below to the current day of the week. 
         var dateFuture = getNextDayOfWeek(new Date(), FRIDAY);
-        //PLACEHOLDER date for testing: 
-        //dateFuture = new Date(2020, 7, 20, 21, 35, 0);
 
         //set Time to 00:00:00:0000 
         dateFuture.setHours(0, 0, 0, 0);
@@ -183,12 +192,7 @@
                 let main = document.getElementById("main"); //main content
 
                 //CONTROL VIDEO
-                //video.setAttribute("loop", true);
-                //video.click();
-                //video.load(); //update settings
-                //video.play();
-                //video.setAttribute("autoplay", '');
-                video.removeAttribute("mute");
+                //video.removeAttribute("mute");
                 main.setAttribute("class", "container-fluid main embed-responsive embed-responsive-16by9");
 
                 //update css
@@ -219,8 +223,8 @@
                 isFriday = false;
                 let video = document.getElementById("video"); //background video
                 //Operation to revert theme + video if its no longer FRIDAY (TBD)
-                video.setAttribute("mute", '');
-                video.removeAttribute("autoplay");
+                //video.setAttribute("mute", '');
+                //video.removeAttribute("autoplay");
                 video.style.display='none';
 
                 //counter values
@@ -297,7 +301,15 @@
             }
         }
 
-        window.onload = function () { GetCount(); }//call when everything has loaded
+        function delayAsyncCall() {
+            return new Promise((resolve) => setTimeout(() => resolve(), 0));
+        }
+    
+        /* CHANGE Video to a Youtube stream to significantly boost loading speed */
+        /* Hide loader on mobile devices */
+        /* Allow loader to only cover alarm clock */
+        /* UPDATE GITHUB */
+        window.onload = function () { delayAsyncCall().then(() => jQuery(".loader-wrapper").fadeOut("slow")); GetCount(); }
     </script>
 </body>
 
