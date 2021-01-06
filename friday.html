@@ -202,29 +202,14 @@
                 theme.setAttribute("href", cssPath);
 
                 countbox.innerHTML = "IT'S FRIDAY!!!";
-
-               
-
-                //Update nav:
-                //let nav1 = document.getElementById('nav1');
-                //let nav2 = document.getElementById('nav2');
-                //nav1.style.display='none';
-                //nav2.style.display='absoulte';
                 isFriday = true;
 
-                //Operation to revert theme if it is no longer friday: (TBD) 
-                //1. Only execute above logic if isFriday = false initially. 
-                //2. Recursively call a function to check if the day is over yet.
-                //   Once the day is over, call GetCount(); 
             }
 
             // Not Friday yet...
             else {
                 isFriday = false;
                 let video = document.getElementById("video"); //background video
-                //Operation to revert theme + video if its no longer FRIDAY (TBD)
-                //video.setAttribute("mute", '');
-                //video.removeAttribute("autoplay");
                 video.style.display='none';
 
                 //counter values
@@ -242,18 +227,6 @@
                 amount = amount % 60;
 
                 secs = Math.floor(amount);//seconds
-
-
-                //Default output string
-                /*
-                if (days != 0) { out += days + " day" + ((days != 1) ? "s" : "") + ", "; }
-                if (days != 0 || hours != 0) { out += hours + " hour" + ((hours != 1) ? "s" : "") + ", "; }
-                if (days != 0 || hours != 0 || mins != 0) { out += mins + " minute" + ((mins != 1) ? "s" : "") + ", "; }
-                out += secs + " seconds";
-                 //document.getElementById('countbox').innerHTML = out;
-                */
-
-
 
                 //label display values
                 let daysString = (days != 1) ? "Days" : "Day";
@@ -305,10 +278,6 @@
             return new Promise((resolve) => setTimeout(() => resolve(), 0));
         }
     
-        /* CHANGE Video to a Youtube stream to significantly boost loading speed */
-        /* Hide loader on mobile devices */
-        /* Allow loader to only cover alarm clock */
-        /* UPDATE GITHUB */
         window.onload = function () { delayAsyncCall().then(() => jQuery(".loader-wrapper").fadeOut("slow")); GetCount(); }
     </script>
 </body>
